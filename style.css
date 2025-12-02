@@ -42,6 +42,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 0;
+            margin-top: 50px;
         }
         
         /* Header */
@@ -267,6 +268,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s;
             max-width: 500px;
+            max-height: 221px;
             margin: 0 ;
             justify-self: stretch;
             margin-left: 50px;
@@ -299,85 +301,147 @@
         }
         
         /* Carousel */
-    .carousel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 80px;
-    }
-    .carousel-btn {
-        color: #00000080;
-        background: none;
-        border: none;
-        border-radius: 50%;
-        width: 100px;
-        height: 100px;
-        font-size: 3rem;
-        cursor: pointer;    
-    }
-    .carousel-slide {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .carousel-slide img,
-.carousel-slide .text-curso {
-    opacity: 1;
-    transition: opacity 0.5s;
+.carousel-layout {
+    display: flex;
+    align-items: stretch; /* antes era center */
+    min-height: 320px;  
+    gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
 }
 
-.carousel-slide.fade img,
-.carousel-slide.fade .text-curso {
-    opacity: 0;
-}
-
-    .carousel-title {
-        font-size: 1.8rem;
-        margin: 10px 0;
-        color: var(--primary);
-    }
-    .carousel-desc {
-        font-size: 1.1rem;
-    }
-
-    .carousel-dots {
+.carousel-image {
+    flex: 0 0 45%;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.carousel-image img {
+    width: 100%;
+    max-width: 470px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    object-fit: cover;
+}
+
+.carousel-content {
+    flex: 1 1 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    gap: 12px;
+}
+.carousel-bottom {
+    margin-top: auto;               /* empurra para a base */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 2em;
+    width: 100%;
+    padding-top: 8px;
+    box-sizing: border-box;
+}
+
+.carousel-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 auto;
+}
+
+.carousel-title { 
+    font-size: 1.8rem; 
+    margin: 0; 
+}
+.carousel-desc  { 
+    font-size: 1.2rem; 
+    color: var(--dark); 
+}
+
+/* dots */
+.carousel-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
 }
 .carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #fff;
-    border: 2px solid var(--primary);
-    cursor: pointer;
-    transition: background 0.2s;
+    width:10px; 
+    height:10px; 
+    border-radius:50%; 
+    background:#ddd; 
+    cursor:pointer;
 }
-.carousel-dot.active {
-    background: var(--primary);
+.carousel-dot.active { background: var(--primary); }
+
+/* setas */
+.carousel-btn {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:44px;
+    height:44px;
+    border-radius:8px;
+    background:transparent;
+    border:none;
+    font-size:1.1rem;
+    color:var(--dark);
+    cursor:pointer;
+    margin-top: 315px;
 }
+
+.btn-inscrever {
+    margin-top: auto;      /* empurra para baixo */
+    align-self: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
         /* Depoimentos */
         .testimonials {
             background: var(--secondary);
         }
         
-        .testimonials-container {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding: 20px 0;
-            scrollbar-width: thin;
-        }
+.testimonials-container {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 18px 6px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    align-items: stretch;
+    scrollbar-width: thin; /* firefox */
+    scrollbar-color: rgba(0,0,0,0.15) rgba(0,0,0,0.03);
+}
         
-        .testimonial-card {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 10px;
-            min-width: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
+.testimonial-card {
+    flex: 0 0 320px; /* largura do card no carrossel */
+    max-width: 340px;
+    background: var(--light);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* empurra autor para baixo */
+    scroll-snap-align: center;
+}
         
         .testimonial-text {
             font-style: italic;
@@ -395,17 +459,42 @@
             left: -10px;
         }
         
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
+.testimonial-author {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 8px;
+}
         
-        .testimonial-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
+.testimonial-author img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 46px;
+}
+.testimonial-author h4 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.1;
+}
+.testimonial-author p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+.testimonials-container::-webkit-scrollbar {
+    height: 8px;
+}
+.testimonials-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.testimonials-container::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.12);
+    border-radius: 8px;
+}
+        .testimonial-author div h4 {
+            margin-bottom: 0;
         }
 
         /* Preço */
@@ -429,9 +518,13 @@
             font-size: 1.3em;
             color: var(--dark);
             text-align: left;        /* Alinha o texto à esquerda */
-            max-width: 400px;        /* Limita a largura para não ficar muito largo */
+            max-width: 550px;        /* Limita a largura para não ficar muito largo */
             width: 100%;
             margin-top: -5px;
+            line-height: 1.45;  
+            word-break: break-word; 
+            hyphens: auto; 
+            margin: 1px 0;   
         }
         hr {
             border-top: 1px solid #a19e9e;
@@ -452,13 +545,8 @@
         .preco-container .garantia img {
             margin-right: 10px;
             width: 70px;
-        }
+            margin-left: 70px;
 
-        .preco-container .garantia p {
-            margin-top: 0;
-            font-size: 1.2em;
-            color: var(--dark);
-            text-align: center;
         }
 
         /* Contato */
@@ -656,23 +744,26 @@
     }
         .course-highlights {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        align-items: start;
         margin-top: 40px;
-    }
-    .highlight-card {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-    }
-    /* Faz o card do meio ocupar a linha de baixo e centralizar */
-    .highlight-card:nth-child(3) {
-        grid-column: 1 / 3;
-        justify-self: center;
-        max-width: 60%;
-    }
-
+        }
+        
+        .highlight-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            max-width: 500px;
+            max-height: 221px;
+            margin: 0 ;
+            justify-self: stretch;
+            margin-left: 50px;
+        }
+        
         .carousel-btn {
         display: flex !important;
         justify-content: center;
@@ -685,11 +776,8 @@
         color: #00000041;
         cursor: pointer;
         z-index: 2;
-        margin-bottom: 200px;
+
     }
-    .course-highlights {
-    gap: 20px;
-}
 
     .testimonials-container {
         display: flex;
@@ -701,10 +789,10 @@
         scrollbar-width: thin;
     }
     .testimonial-card {
-        min-width: 250px;
+        min-width: 350px;
         margin: 10px;
         flex: 1;
-        max-width: 300px;
+        max-width: 350px;
     }
         .carousel {
         gap: 0px !important;
@@ -718,29 +806,25 @@
         
     }
 
-    .carousel-btn {
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        width: 60px;
-        height: 400px;
-        font-size: 2rem;
-        background: none;
-        border: none;
-        color: #00000041;
-        cursor: pointer;
-        z-index: 2;
-        margin-bottom: 200px;
+.carousel-btn {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:44px;
+    height:44px;
+    border-radius:8px;
+    background:transparent;
+    border:none;
+    font-size:1.1rem;
+    color:var(--dark);
+    cursor:pointer;
+    margin-top: 315px;
 }
     .carousel-slide {
         width: 100%;
         min-width: 0;
     }
 
-    .carousel-dots {
-        margin-bottom: 1em;
-        margin-top: 0.5em;
-    }
         .footer-content {
         flex-direction: row;
         gap: 60px;
@@ -767,7 +851,10 @@
     .social-links {
         justify-content: flex-start;
     }
-        }
+}
+
+
+
         @media (max-width: 500px) {
             
         html, body {
@@ -793,10 +880,10 @@
         opacity: 1;
         pointer-events: none;
         }
-    nav ul.show {
-        transform: translateX(0);
-        pointer-events: auto;
-    }
+        nav ul.show {
+            transform: translateX(0);
+            pointer-events: auto;
+        }
         nav ul li {
             padding: 12px 16px;
             border-bottom: 1px solid #eee;
@@ -845,37 +932,53 @@
                 padding: 1em;
                 margin-top: 1em;
             }
-    .carousel {
-        gap: 80px !important;
-        width: 100vw;
-        max-width: 100vw;
-        box-sizing: border-box;
-        justify-content: space-between;
-        padding: 0 5px;
-    }
-.carousel-btn {
-        display: flex !important;
-        justify-content: center;
+
+            .carousel-btn {
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                font-size: 1.6rem;
+                background: none;
+                border: none;
+                color: #00000041;
+                cursor: pointer;
+                z-index: 2;
+                margin-top: 120px;
+            }
+         .carousel-layout {
+        flex-direction: column;
+        min-height: unset;
+        gap: 15px;
+
+    }   
+    .carousel-panel {
         align-items: center;
-        width: 40px;
-        height: 400px;
-        font-size: 1.6rem;
-        background: none;
-        border: none;
-        color: #00000041;
-        cursor: pointer;
-        z-index: 2;
-        margin-bottom: 200px;
-}
+        text-align: center;
+        max-height: 300px;
+    }
+
+    .carousel-image {
+        flex: none;
+        width: 100%;
+        max-width: 90vw;
+        margin: 0 auto;
+    }
+    .carousel-content {
+        flex: none;
+        width: 100%;
+        text-align: center;
+        padding: 0 10px;
+    }
     .carousel-slide {
         width: 100%;
         min-width: 0;
     }
     .carousel-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     .carousel-desc {
-        font-size: 1rem;
+        font-size: 0.9rem;
         width: 350px;
     }
     .carousel-dots {
@@ -1073,4 +1176,7 @@
             animation: fadeIn 1s ease-out forwards;
         }
 
-        
+
+
+
+     
