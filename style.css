@@ -1160,6 +1160,37 @@
     }
 }
 
+/* layout base para prender o footer ao fundo da viewport */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    /* suporte para iOS Safari/Chrome safe area */
+    min-height: -webkit-fill-available;
+}
+
+/* wrapper que ocupa o espaço disponível entre header e footer */
+.site-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* garante que o footer não encolha e fique na base */
+footer {
+    flex-shrink: 0;
+}
+
+/* ajuste específico para telas muito pequenas (evita gaps por barras do browser) */
+@media (max-width: 400px) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
         /* Animações */
         @keyframes fadeIn {
             from {
